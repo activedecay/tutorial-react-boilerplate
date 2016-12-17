@@ -1,0 +1,19 @@
+/**
+* selectors remember the structure of the state.
+* all top-level state querying is encapsulated here.
+*/
+import {createSelector} from 'reselect'; // memoizer
+
+/** Direct selector to the {{ camelCase name }} state domain. */
+// todo you must now see reducers.js "todo must add above" comment
+const select{{ properCase name }}Domain = () => state => state.get('{{ camelCase name }}');
+
+const select{{ properCase name }}Substate = () => createSelector(
+  select{{ properCase name }}Domain(),
+  (domain) => domain.toJS()
+);
+
+export {
+  select{{ properCase name }}Domain,
+  select{{ properCase name }}Substate,
+};

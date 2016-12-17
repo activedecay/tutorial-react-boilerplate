@@ -1,0 +1,10 @@
+.filterLink { /* stylelint-disable */
+  background-color: lightcoral;
+  padding: 2px;
+}
+.selected {
+ color: blue
+}
+.not-selected {
+ color: grey
+}

@@ -1,0 +1,43 @@
+// import {{ properCase name }} from '../index';
+
+import { Provider } from 'react-redux';
+
+import expect from 'expect';
+import { shallow } from 'enzyme';
+// import React from 'react';
+
+describe('<{{ properCase name }} />', () => {
+  it('Expect to have unit tests specified', () => {
+    expect(true).toEqual(false);
+  });
+
+
+  it('has its own access to the store values', () => {
+    const renderedComponent = shallow(
+    <Provider store={store}>
+      <LanguageProvider messages={translationMessages}>
+        <LocaleToggle />
+      </LanguageProvider>
+    </Provider>
+    );
+    expect(renderedComponent.contains(<LocaleToggle />)).toEqual(true);
+  });
+
+
+  it('should render the default language messages', () => {
+    const messages = defineMessages({
+      someMessage: {
+        id: 'some.id',
+        defaultMessage: 'This is some default message',
+      },
+    });
+    const renderedComponent = shallow(
+      <Provider store={store}>
+        <LanguageProvider messages={translationMessages}>
+          <FormattedMessage {...messages.someMessage} />
+        </LanguageProvider>
+      </Provider>
+    );
+    expect(renderedComponent.contains(<FormattedMessage {...messages.someMessage} />)).toEqual(true);
+  });
+});

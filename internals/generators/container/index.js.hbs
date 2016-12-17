@@ -1,0 +1,68 @@
+import React from 'react';
+import { connect } from 'react-redux';
+{{#if wantHeaders}}
+import Helmet from 'react-helmet';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import {select{{properCase name}}Domain, select{{properCase name}}Substate} from './selectors';
+import {createStructuredSelector} from 'reselect';
+{{/if}}
+{{#if wantMessages}}
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+{{/if}}
+{{#if wantCSS}}
+import styles from './styles.css';
+{{/if}}
+
+export class {{ properCase name }} extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      {{#if wantCSS}}
+      <div className={{curly true}}styles.{{ camelCase name }}{{curly}}>
+      {{else}}
+      <div>
+      {{/if}}
+      {{#if wantHeaders}}
+      <Helmet
+        title="{{properCase name}}"
+        meta={{curly true}}[
+          {{curly true}} name: 'description', content: 'Description of {{properCase name}}' {{curly}},
+        ]{{curly}}
+      />
+      {{/if}}
+      {{#if wantMessages}}
+        <FormattedMessage {...messages.header} />
+      {{/if}}
+      </div>
+    );
+  }
+}
+
+{{#if wantActionsAndReducer}}
+//const mapStateToProps = select{{properCase name}}();
+const mapStateToProps = createStructuredSelector({
+  domain: select{{properCase name}}Domain(),
+  substate: select{{properCase name}}Substate(),
+})
+{{/if}}
+
+// when function arguments do not match the action creators (abnormal!)
+/*const mapDispatchToProps = (dispatch) => ({
+  onClickBtn(id, v) {dispatch(addTodo(id, v); doSomethingCrazy())},
+  onClickListItem(id) {dispatch(toggleTodo(id); doWileThings())},
+  onFilterClick(id) {dispatch(setVisibility(id); doInsanity())},
+  dispatch
+})*/
+// when function arguments match the creators
+const mapDispatchToProps = {
+  onClickBtn: addTodo,
+  onClickListItem: toggleTodo,
+  onFilterClick: setVisibility
+}
+
+{{#if wantActionsAndReducer}}
+export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});
+{{else}}
+export default connect(mapDispatchToProps)({{ properCase name }});
+{{/if}}

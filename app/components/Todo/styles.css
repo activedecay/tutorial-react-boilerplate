@@ -1,0 +1,6 @@
+.todo { /* stylelint-disable */
+}
+
+.completed {
+  text-decoration: line-through;
+}
