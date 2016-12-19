@@ -1,6 +1,9 @@
 import {Map as ImmutMap, List as ImmutList} from 'immutable'
 
 const derived = {
+  // this term "fold" is overloaded... however, the intuition
+  // is to remove the value from the context.
+  // the context is a list of thing. so fold removes 1 thing.
   fold : function(empty) {
     return this.foldMap(x => x, empty)
   },
@@ -61,7 +64,5 @@ ImmutMap.prototype.sequence = derived.sequence
 // monad
 ImmutMap.prototype.chain = ImmutMap.prototype.flatMap
 
-export default {
-  List: ImmutList,
-  Map: ImmutMap
-}
+export const List = ImmutList
+export const Map = ImmutMap

@@ -20,6 +20,6 @@ export default defineMessages({
   },
   all: {
     id: 'app.containers.ReduxLesson.all',
-    defaultMessage: 'allah dem',
+    defaultMessage: 'all dem',
   },
 });

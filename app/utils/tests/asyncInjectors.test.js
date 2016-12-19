@@ -76,7 +76,7 @@ describe('asyncInjectors', () => {
     });
 
     describe('injectAsyncReducer', () => {
-      it('given a store, it should provide a function to inject a reducer', () => {
+      it('given a store, it should provide a method to inject a reducer', () => {
         const injectReducer = injectAsyncReducer(store);
 
         injectReducer('test', reducer);
@@ -129,7 +129,7 @@ describe('asyncInjectors', () => {
     });
 
     describe('injectAsyncSagas', () => {
-      it('given a store, it should provide a function to inject a saga', () => {
+      it('given a store, it should provide a method to inject a saga', () => {
         const injectSagas = injectAsyncSagas(store);
 
         injectSagas(sagas);

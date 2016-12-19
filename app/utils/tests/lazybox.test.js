@@ -1,3 +1,10 @@
-/**
- * Created by 24818 on 12/18/2016.
- */
+import LazyBox from '../lazybox'
+import expect from 'expect'
+
+describe('fun lazy box', () => {
+  it('is a lazy egg', () => {
+    expect(LazyBox(() => {
+      throw "nope"
+    }).map(a => b))
+  })
+})
