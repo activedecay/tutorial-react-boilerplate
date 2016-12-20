@@ -7,7 +7,7 @@ export const Right = (x) => ({
     rightX => Right(x.concat(rightX))),
   ap: monad => monad.map(x), // same as Right(x(monad.fold(id))),
   inspect: () => `Right(${x})`,
-})
+});
 export const Left = (x) => ({
   map: f => Left(x), // just plain won't run the function
   chain: f => Left(x), // must return an either
@@ -15,16 +15,16 @@ export const Left = (x) => ({
   fold: (left, r) => left(x), // remove the value from its context
   ap: monad => monad.map(x),
   inspect: () => `Left(${x})`,
-})
+});
 export const Either = {
-  of: x => Right(x)
-}
+  of: x => Right(x),
+};
 export const fromNullable = (x) =>
-  x != null ? Right(x) : Left(null)
+  x != null ? Right(x) : Left(null);
 export const tryCatch = (f) => {
   try {
-    return Right(f())
-  } catch(e) {
-    return Left(e)
+    return Right(f());
+  } catch (e) {
+    return Left(e);
   }
-}
+};
