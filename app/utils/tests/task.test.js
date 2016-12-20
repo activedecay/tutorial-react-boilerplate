@@ -28,12 +28,27 @@ describe('fun task', () => {
   })
 })
 
-const app = () =>
-  readFile('config.json', 'utf-8', (err, contents) => {
-    if (err) throw err
-    const newContents = contents.replace(/777/g, '666')
-    fs.writeFile('config.edit.json, newcontents', (err, _) => {
-      if(err) throw err
-      expect(true).toExist()
-    })
-  })
+// const app = () =>
+//   readFile('config.json', 'utf-8', (err, contents) => {
+//     if (err) throw err
+//     const newContents = contents.replace(/777/g, '666')
+//     fs.writeFile('config.edit.json, newcontents', (err, _) => {
+//       if (err) throw err
+//     })
+//   })
+
+// const readFile = (filename, encoding) => {
+//   new Task((rej, res) =>
+//     fs.readFile(filename, encoding, (err, contents) =>
+//       err ? rej(err) : res(contents)))
+// }
+// const writeFile = (filename, contents) => {
+//   new Task((rej, res) =>
+//     fs.writeFile(filename, contents, (err, ok) =>
+//       err ? rej(err) : res(contents)))
+// }
+//
+// const app = // this won't be invoked until someone calls fork
+//   readFile("config.json", "utf-8")
+//     .map(contents => contents.replace(/777/g, '666'))
+//     .chain(newContents => writeFile("config.edit.json", newContents))
