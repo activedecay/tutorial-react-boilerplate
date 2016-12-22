@@ -1,10 +1,10 @@
 import Task from 'data.task';
 import expect from 'expect';
 import Box from '../box';
-import { Either } from '../either';
-import { id } from '../join';
-import { Map, List } from '../immutable-ext';
-import { futurize } from 'futurize';
+import {Either} from '../either';
+import {id} from '../join';
+import {Map, List} from '../immutable-ext';
+import {futurize} from 'futurize';
 const future = futurize(Task);
 
 const addNormal = (x, y) => x + y; // takes 2 arguments at runtime
@@ -50,7 +50,7 @@ describe('fun "ap" apply functions as values inside monads/functors', () => {
   // const liftA2 = (f, x, y) => F(f).ap(x).ap(y) // can't write this one because we don't know F reflectively
   const liftA2 = (f, x, y) => x.map(f).ap(y); // but we can write this because of the above property.
 
-  const $ = selector => Either.of({ selector, height: 10 });
+  const $ = selector => Either.of({selector, height: 10});
   const getScreenSizeBad = (screen, head, foot) => screen - (head.height + foot.height);
   const getScreenSize = screen => head => foot => screen - (head.height + foot.height);
 
@@ -84,7 +84,7 @@ describe('fun "ap" apply functions as values inside monads/functors', () => {
   const Db = ({
     find: id => new Task((rej, res) =>
       setTimeout(() =>
-        res({ id, title: `Project:${id}` }), 1)), // could be set to larger timeout, but i'm impatient.
+        res({id, title: `Project:${id}`}), 1)), // could be set to larger timeout, but i'm impatient.
   });
   const reportHeader = (p1, p2) => `Report: ${p1.title} compare ${p2.title}`;
 
@@ -92,9 +92,9 @@ describe('fun "ap" apply functions as values inside monads/functors', () => {
     Db.find(20).chain(p1 =>
       Db.find(8).map(p2 => // waits for first db.find to complete !!! that's bad
         reportHeader(p1, p2))).fork(id, result => {
-          expect(result).toEqual('Report: Project:20 compare Project:8');
-          done();
-        });
+      expect(result).toEqual('Report: Project:20 compare Project:8');
+      done();
+    });
   });
   it('speed up the app using ap', (done) => {
     Task.of(p1 => p2 => reportHeader(p1, p2))
@@ -106,11 +106,56 @@ describe('fun "ap" apply functions as values inside monads/functors', () => {
       });
   });
 
-  it('wow, getting complicated', (done) => {
-    const tits = future((arg) => {
+  // function read1(path) {
+  //   return new Task(function (reject, resolve) {
+  //     fs.readFile(path, function (error, data) {
+  //       if (error) reject(error)
+  //       else resolve(data)
+  //     })
+  //   })
+  // }
+  //
+  // function read2(path) {
+  //   return new Task(function (reject, resolve) {
+  //     fs.readFile(path, function (error, data) {
+  //       if (error) reject(error)
+  //       else resolve(data)
+  //     })
+  //   })
+  // }
+  // const fs.readFile(path, callback(error, data))
+  // future = futurize(Future)
+  // const read3 = future(fs.readFile);
+
+  describe('fun task things', () => {
+    const read = future((arg, callback) => {
+      console.info('inside', arguments)
       expect(arg).toBe('ass');
-      done();
+      arguments[arguments.length - 1](0, 'success')
     });
-    tits('ass').fork(id, id); // the app wont finish without fork being called.
-  });
+
+    it('wow, getting complicated', (done) => {
+      readFile('ass', done)
+        .fork()
+    })
+    // .fork(_ => {
+    //   expect(arguments).toBe({})
+    //   done()
+    // }, _ => {
+    //   expect(arguments).toBe({})
+    //   done()
+    // }); // the app wont finish without fork being called.
+    // });
+  })
+
+
+  // const getHttp = future((arg) => {
+  //   setTimeout(() => {
+  //
+  //   }, 100)
+  // });
+  // it('create tasks for a list of filenames', () => {
+  //   const files = ['net.conf.json', 'core.conf.json']
+  //   files.map(filename => readFile())
+  // })
 });
