@@ -1,5 +1,6 @@
 // Either = Right || Left
 export const Right = (x) => ({
+  x, // required for equality comparison
   map: f => Right(f(x)), // runs the function
   chain: f => f(x), // f must return an either
   fold: (l, right) => right(x), // remove value from its context
@@ -9,6 +10,7 @@ export const Right = (x) => ({
   inspect: () => `Right(${x})`,
 });
 export const Left = (x) => ({
+  x, // required for equality comparison
   map: f => Left(x), // just plain won't run the function
   chain: f => Left(x), // must return an either
   concat: f => Left(x), // just plain won't run the function

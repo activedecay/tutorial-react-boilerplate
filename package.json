@@ -188,6 +188,7 @@
     "fontfaceobserver": "2.0.1",
     "history": "3.0.0",
     "immutable": "3.8.1",
+    "immutable-ext": "^1.0.8",
     "intl": "1.2.4",
     "invariant": "2.2.1",
     "ip": "1.1.3",

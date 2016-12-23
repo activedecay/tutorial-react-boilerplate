@@ -53,7 +53,7 @@ ImmutMap.prototype.empty = ImmutMap.empty
 ImmutMap.prototype.fold = derived.fold
 ImmutMap.prototype.foldMap = derived.foldMap
 
-// traverable
+// traversable
 ImmutMap.prototype.traverse = function(point, f) {
   return this.reduce((acc, v, k) =>
     f(v, k).map(x => y => y.merge({[k]: x})).ap(acc), point(ImmutMap.empty))

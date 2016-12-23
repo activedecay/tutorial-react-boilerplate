@@ -65,9 +65,12 @@ describe('fun monads', () => {
 
   it('map is definable by F.of and chain()', () => {
     const m = Box.of('ass');
-    expect(Box.of('ass').map(ass => 'tits')).toEqual(m.chain(ass => Box.of('tits')));
+    expect(m.map(ass => ass + 'tits'))
+      .toEqual(m.chain(ass => Box.of(ass + 'tits')));
     expect(Box(x => x + 1).map(x => x(1))).toEqual(Box(2));
+    expect(Box(x => x + 1).ap(Box(1))).toEqual(Box(2));
     // weird how he said `m.chain(x => M.of(f(x))` what does that mean?
+    //               `ap: Right(x(monad.fold(id)))` (this is how i wrote ap my first time)
     // a monad is a functor? jesus wtf are you talking about
     // a monad is an applicative functor? jesus wtf are you talking about
   });
