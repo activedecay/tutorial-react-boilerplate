@@ -1,6 +1,6 @@
-import {All, Sum, First} from '../semigroup'
-import {Right, Left} from '../either'
-import {Map, List} from '../immutable-ext'
+import { All, Sum, First } from '../semigroup'
+import { Right, Left } from '../either'
+import { Map, List } from '../immutable-ext'
 import expect from 'expect'
 
 describe('fun semigroup', () => {
@@ -14,7 +14,7 @@ describe('fun semigroup', () => {
     expect(All.empty().concat(All(true)).concat(All(true)))
       .toEqual(All(true))
     expect(First('troll')
-      .concat("lol").concat('trill')).toEqual(First('troll'))
+      .concat('lol').concat('trill')).toEqual(First('troll'))
   })
   it('either semigroup', () => {
     expect(Right('lol').concat(Right('hehe')).fold(null, a => a))
@@ -29,18 +29,15 @@ describe('fun semigroup', () => {
 // if all attributes are concat-able, then object is concatable
 const acct1 =
   Map({
-    name: First("Bob R."), paid: All(false),
-    score: Sum(3), friends: ['Jordy']
+    name: First('Bob R.'), paid: All(false), score: Sum(3), friends: ['Jordy'],
   })
 const acct2 =
   Map({
-    name: First("Bob R."), paid: All(true),
-    score: Sum(1), friends: ['Bjork'], enemies: ['Becky']
+    name: First('Bob R.'), paid: All(true), score: Sum(1), friends: ['Bjork'], enemies: ['Becky'],
   })
 const acct3 =
   {
-    enemies: ['Becky'], friends: ['Jordy', 'Bjork'],
-    name: First("Bob R."), paid: All(false), score: Sum(4)
+    enemies: ['Becky'], friends: ['Jordy', 'Bjork'], name: First('Bob R.'), paid: All(false), score: Sum(4),
   }
 
 describe('fun immutable concatable', () => {
@@ -60,14 +57,14 @@ describe('fun reducing and folding == foldMap', () => {
       .toEqual(Sum(3))
   })
   it('should written sexier', () => {
-    expect(Map({brian:3,sara:1})
-      // .map(n => Sum(n))
+    expect(Map({ brian: 3, sara: 1 })
+    // .map(n => Sum(n))
       .map(Sum)
       .fold(Sum.empty())).toEqual(Sum(4))
   })
   it('should written even sexier', () => {
-    expect(Map({brian:3,sara:1})
-      // .map(n => Sum(n))
+    expect(Map({ brian: 3, sara: 1 })
+    // .map(n => Sum(n))
       .foldMap(Sum, Sum.empty())).toEqual(Sum(4))
   })
   it('eat my ass', () => {

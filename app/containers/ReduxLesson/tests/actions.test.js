@@ -1,6 +1,6 @@
 import expect from 'expect'
-import {addTodo, removeTodo, toggleTodo} from '../actions'
-import {ADD_TODO,REMOVE_TODO,TOGGLE_TODO} from '../constants'
+import { addTodo, removeTodo, toggleTodo } from '../actions'
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from '../constants'
 
 describe('ReduxLesson actions', () => {
   describe('action types', () => {
@@ -8,24 +8,24 @@ describe('ReduxLesson actions', () => {
       const expected = {
         type: ADD_TODO,
         id: 1,
-        text: 'hi'
-      };
+        text: 'hi',
+      }
       expect(addTodo(1, 'hi')).toEqual(expected)
-    });
+    })
 
     it('has a toggle', () => {
       const expected = {
         type: TOGGLE_TODO,
-        id: 1
+        id: 1,
       }
       expect(toggleTodo(1, 'hi')).toEqual(expected)
-    });
+    })
 
     it('has a remove', () => {
       const expected = {
-        type: REMOVE_TODO
+        type: REMOVE_TODO,
       }
       expect(removeTodo()).toEqual(expected)
     })
-  });
-});
+  })
+})

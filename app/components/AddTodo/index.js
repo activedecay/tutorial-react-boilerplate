@@ -1,31 +1,35 @@
 /**
-*
-* AddTodo
-*
-*/
+ *
+ * AddTodo
+ *
+ */
 
-import React from 'react';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-
-import styles from './styles.css';
+import React from 'react'
+import styles from './styles.css'
 import Button from '../../components/Button'
 
-const AddTodo = ({onClick}) => { // todo fix generator (don't use function)
-  let ourText;
+const AddTodo = ({ onClick }) => { // todo fix generator (don't use function)
+  let ourText
   return (
     <div className={styles.addTodo}>
-      <input ref={node => {
-        ourText = node
-      }} />
+      <input
+        ref={node => {
+          ourText = node
+        }}
+      />
 
-      <Button onClick={() => {
-        onClick(ourText.value)
-        ourText.value = ''
-      }}> add </Button>
+      <Button
+        onClick={() => {
+          onClick(ourText.value)
+          ourText.value = ''
+        }}
+      > add </Button>
     </div>
-  );
+  )
 }
 
-export default AddTodo;
+AddTodo.propTypes = {
+  onClick: React.PropTypes.func,
+}
+
+export default AddTodo

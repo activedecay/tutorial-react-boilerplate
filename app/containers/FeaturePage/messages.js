@@ -3,7 +3,7 @@
  *
  * This contains all the text for the FeaturePage component.
  */
-import { defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl'
 
 export default defineMessages({
   header: {
@@ -96,4 +96,4 @@ export default defineMessages({
     id: 'boilerplate.containers.FeaturePage.home',
     defaultMessage: 'Home',
   },
-});
+})

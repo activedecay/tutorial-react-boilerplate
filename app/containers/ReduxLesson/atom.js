@@ -8,11 +8,11 @@ const todo = (state, action) => {
       return fromJS({
         id: action.id,
         text: action.text,
-        completed: false
+        completed: false,
       })
     case C.TOGGLE_TODO:
       if (state.get('id') === action.id) {
-        return state.set('completed', !state.get('completed'));
+        return state.set('completed', !state.get('completed'))
       }
       return state
     case C.REMOVE_TODO:

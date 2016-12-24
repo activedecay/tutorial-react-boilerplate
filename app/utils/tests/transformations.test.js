@@ -1,10 +1,10 @@
-import {Either, Right, Left, fromNullable} from '../either'
-import {List, Map} from '../immutable-ext';
+import { Either, Right, Left, fromNullable } from '../either'
+import { List } from '../immutable-ext'
 import Box from '../box'
-import expect from 'expect';
-import Task from 'data.task';
-import {futurize} from 'futurize';
-const future = futurize(Task);
+import expect from 'expect'
+import Task from 'data.task'
+import { futurize } from 'futurize'
+const future = futurize(Task)
 
 
 // nt is natural transformation, which is, graphically:
@@ -19,7 +19,7 @@ const future = futurize(Task);
 // nt holds if this property can be applied
 // nt(F).map(f) = nt(G.map(f))
 // nt(F.of(x)).map(f) = nt(G.of(x).map(f))
-let add1 = x => x + 1 // some f
+const add1 = x => x + 1 // some f
 
 // remove the Either from its context, package the value into a Task
 const eitherToTask = e =>
@@ -56,9 +56,12 @@ describe('fun transformations', () => {
 })
 
 describe('fun natural transforms (nt) that do actual work', () => {
-  it('in this sense, list is a nt function', () => {
-    let words = ['hello', 'world']//.chain(a => a.split(''))
-    words = List(['hello', 'world']).chain(a => List(a.split('')))
+  it('in this sense, list is an nt', () => {
+    let words = ['hello', 'world']// .chain(a => a.split(''))
+    words = List(['hello', 'world'])
+      .chain(a => List(a.split('')))
+    expect(words.toJS())
+      .toEqual(['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd'])
   })
 
   const largeNumbers = loi => loi.filter(x => x > 100)
@@ -75,13 +78,17 @@ describe('fun natural transforms (nt) that do actual work', () => {
 
   const getDb = (id, error, cb) =>
     setTimeout(() => {
-      error ? cb(Left(id + ": not found")) : cb(error, Right(mockUser(id)))
+      if (error) {
+        cb(Left(`${id}: not found`))
+      } else {
+        cb(error, Right(mockUser(id)))
+      }
     }, 100)
   const query = future(getDb) // query is an async future task
-  const mockUser = id => ({id, bitchId: id - 1})
+  const mockUser = id => ({ id, bitchId: id - 1 })
 
   it('more actual work', (done) => {
-    let isError = false
+    const isError = false
     query(8, isError).fork(null, (result) => {
       expect(result).toEqual(Right(mockUser(8)))
       done()
@@ -92,10 +99,10 @@ describe('fun natural transforms (nt) that do actual work', () => {
   //   .map(x => x + 1)
   //   .chain(x => Task.of(x + 1))
   //   .fork(err, ok)
-  //... and so, here's the naive solution
+  // ... and so, here's the naive solution
 
   it('super duper complex', (done) => {
-    let isError = false
+    const isError = false
     query(3, isError) // task(either(user))
       .map(either =>// either(user)
         either.map(user =>
@@ -103,10 +110,10 @@ describe('fun natural transforms (nt) that do actual work', () => {
       ) // task(either(either(task(either(user))))) //*christ!*
 
     // this is better
-    const app = (id, isError) => query(id, isError) // task(either(user))
+    const app = (id, err) => query(id, err) // task(either(user))
     // .map(eitherToTask) // task(task(user)) because no chain
       .chain(eitherToTask) // task(user) because F(x)=>G(x)
-      .chain(user => query(user.bitchId, isError) // task(either(user))
+      .chain(user => query(user.bitchId, err) // task(either(user))
       )// task(either(user))
       .chain(eitherToTask)// task(user)
 

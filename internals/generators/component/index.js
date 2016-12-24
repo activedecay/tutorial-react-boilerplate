@@ -1,10 +1,10 @@
-const componentExists = require('../utils/componentExists');
+const componentExists = require('../utils/componentExists')
 
 
-const es6Class = 'ES6 Class';
-const funcType = 'Stateless Function';
+const es6Class = 'ES6 Class'
+const funcType = 'Stateless Function'
 
-const type = 'type';
+const type = 'type'
 
 /*
 todo consider adding a component that is only allowed to dispatch. in this case, connect()(Component)
@@ -31,10 +31,10 @@ module.exports = {
     default: 'Button',
     validate: value => {
       if ((/.+/).test(value)) {
-        return componentExists(value) ? 'A component or container with this name already exists' : true;
+        return componentExists(value) ? 'A component or container with this name already exists' : true
       }
 
-      return 'The name is required';
+      return 'The name is required'
     },
   }, {
     type: 'confirm',
@@ -59,7 +59,7 @@ module.exports = {
       path: '../../app/components/{{properCase name}}/tests/index.test.js',
       templateFile: './component/index.test.js.hbs',
       abortOnFail: true,
-    }];
+    }]
 
     // If they want a CSS file, add styles.css
     if (prompt.wantCSS) {
@@ -68,7 +68,7 @@ module.exports = {
         path: '../../app/components/{{properCase name}}/styles.css',
         templateFile: './component/styles.css.hbs',
         abortOnFail: true,
-      });
+      })
     }
 
     // If they want a i18n messages file
@@ -78,9 +78,9 @@ module.exports = {
         path: '../../app/components/{{properCase name}}/messages.js',
         templateFile: './component/messages.js.hbs',
         abortOnFail: true,
-      });
+      })
     }
 
-    return actions;
+    return actions
   },
-};
+}

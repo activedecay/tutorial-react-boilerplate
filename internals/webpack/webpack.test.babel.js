@@ -2,12 +2,12 @@
  * TEST WEBPACK CONFIGURATION
  */
 
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 const modules = [
   'app',
   'node_modules',
-];
+]
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -87,4 +87,4 @@ module.exports = {
       sinon: 'sinon/pkg/sinon',
     },
   },
-};
+}

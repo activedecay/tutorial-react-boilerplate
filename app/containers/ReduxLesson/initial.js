@@ -1,4 +1,4 @@
-import {fromJS} from 'immutable'
+import { fromJS } from 'immutable'
 
-const initialState = fromJS({todos: []}) /* todo add initial.js to generator*/
+const initialState = fromJS({ todos: [] }) /* todo add initial.js to generator*/
 export default initialState

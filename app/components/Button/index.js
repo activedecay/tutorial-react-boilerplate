@@ -6,19 +6,19 @@
  * otherwise it'll render a link with an onclick
  */
 
-import React, { PropTypes, Children } from 'react';
+import React, { PropTypes, Children } from 'react'
 
-import styles from './styles.css';
+import styles from './styles.css'
 
 function Button(props) {
-  const className = props.className ? props.className : styles.button;
+  const className = props.className ? props.className : styles.button
 
   // Render an anchor tag
   let button = (
     <a className={className} href={props.href} onClick={props.onClick}>
       {Children.toArray(props.children)}
     </a>
-  );
+  )
 
   // If the Button has a handleRoute prop, we want to render a button
   if (props.handleRoute) {
@@ -26,14 +26,14 @@ function Button(props) {
       <button className={className} onClick={props.handleRoute}>
         {Children.toArray(props.children)}
       </button>
-    );
+    )
   }
 
   return (
     <div className={styles.buttonWrapper}>
       {button}
     </div>
-  );
+  )
 }
 
 Button.propTypes = {
@@ -42,6 +42,6 @@ Button.propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Button;
+export default Button

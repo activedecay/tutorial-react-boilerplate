@@ -1,8 +1,8 @@
+/* eslint-disable no-console */
 const Task = require('data.task')
 const Either = require('data.either')
-const Left = Either.Left
 const request = require('request')
-const {List, Map} = require('immutable-ext')
+const { List, Map } = require('immutable-ext')
 const keys = require('./keys')
 /*
  * client ID and client secret key needed
@@ -22,12 +22,12 @@ const saveToken = token => {
 }
 const getAccess = () =>
   Either.fromNullable(bearer)
-    .fold(left => postHttp({
-        url: tokenUrl,
-        method: "POST",
-        form: {grant_type: 'client_credentials'},
-        headers: {Authorization: 'Basic ' + keys.base64}
-      })
+    .fold(() => postHttp({
+      url: tokenUrl,
+      method: 'POST',
+      form: { grant_type: 'client_credentials' },
+      headers: { Authorization: `Basic ${keys.base64}` },
+    })
         .map(parse)
         .chain(eitherToTask)
         .map(j => j.access_token)
@@ -44,13 +44,13 @@ const artistsRelatedToUrl = (id) =>
 const eitherToTask = e => e.fold(Task.rejected, Task.of)
 const intersection = xs => ({
   xs,
-  concat: ({xs: ys}) =>
-    intersection(xs.filter(x => ys.some(y => x === y)))
+  concat: ({ xs: ys }) =>
+    intersection(xs.filter(x => ys.some(y => x === y))),
 })
 const Sum = x => ({
   x,
-  concat: ({x: y}) => Sum(x + y), // destructure x
-  inspect: () => `Sum(${x})`
+  concat: ({ x: y }) => Sum(x + y), // destructure x
+  inspect: () => `Sum(${x})`,
 })
 
 const parse = Either.try(JSON.parse)
@@ -64,11 +64,11 @@ const postHttp = options =>
       err ? rej() : res(body)))
 const getJson = (url) =>
   getAccess()
-    .chain(access => getHttp({url, headers: {'Authorization': 'Bearer ' + access}}))
+    .chain(access => getHttp({ url, headers: { Authorization: `Bearer ${access}` } }))
     .map(parse)
     .chain(eitherToTask)
 
-const log = data => {
+const log = data => { // eslint-disable-line no-unused-vars
   console.log(data)
   return data
 }
@@ -89,7 +89,7 @@ const related = name =>
     .chain(relatedArtists)
 
 const artistIntersection = rels =>
-  rels.foldMap(xs => Map({xs: intersection(xs), sum: Sum(xs.length)}))
+  rels.foldMap(xs => Map({ xs: intersection(xs), sum: Sum(xs.length) }))
 
 const formatString = depth => j => JSON.stringify(j, null, depth)
 
@@ -97,7 +97,7 @@ const main = (names) =>
   names // List.of([name,names...]
     .traverse(Task.of, related) // Task.of([related,related artists...]
     .map(artistIntersection)
-    .map(o => [o.get('xs')['xs'], o.get('sum').x])
+    .map(o => [o.get('xs').xs, o.get('sum').x])
     .map(formatString(2))
 
 // oasis blur radiohead => pulp

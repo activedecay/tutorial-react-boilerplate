@@ -1,28 +1,28 @@
-import expect from 'expect';
-import { shallow } from 'enzyme';
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import expect from 'expect'
+import { shallow } from 'enzyme'
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import messages from '../messages';
-import Footer from '../index';
-import A from 'components/A';
+import messages from '../messages'
+import Footer from '../index'
+import A from 'components/A'
 
 describe('<Footer />', () => {
   it('should render the copyright notice', () => {
     const renderedComponent = shallow(
       <Footer />
-    );
+    )
     expect(renderedComponent.contains(
       <section>
         <p>
           <FormattedMessage {...messages.licenseMessage} />
         </p>
       </section>
-    )).toEqual(true);
-  });
+    )).toEqual(true)
+  })
 
   xit('should render the credits', () => {
-    const renderedComponent = shallow(<Footer />);
+    const renderedComponent = shallow(<Footer />)
     expect(renderedComponent.contains(
       <section>
         <p>
@@ -34,6 +34,6 @@ describe('<Footer />', () => {
           />
         </p>
       </section>
-    )).toEqual(true);
-  });
-});
+    )).toEqual(true)
+  })
+})

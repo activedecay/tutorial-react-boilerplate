@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import 'whatwg-fetch'
 
 /**
  * Parses the JSON returned by a network request
@@ -6,7 +6,7 @@ import 'whatwg-fetch';
  * @return {object} The parsed JSON from the request
  */
 function parseJSON(response) {
-  return response.json();
+  return response.json()
 }
 
 /**
@@ -16,12 +16,12 @@ function parseJSON(response) {
  */
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  const error = new Error(response.statusText)
+  error.response = response
+  throw error
 }
 
 /**
@@ -34,6 +34,6 @@ export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
-    .then((data) => ({data}))
-    .catch((err) => ({err}));
+    .then((data) => ({ data }))
+    .catch((err) => ({ err }))
 }

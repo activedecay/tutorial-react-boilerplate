@@ -4,5 +4,5 @@ const LaxyBox = g => ({ // promises/observables/streams
   // TODO define chain: f => f(x), // f must return another Box
   fold: f => f(g()),
   inspect: () => `Box(${g})`,
-});
-export default LaxyBox;
+})
+export default LaxyBox

@@ -1,10 +1,5 @@
-import {Either, Right, Left, fromNullable} from '../either'
-import {List, Map} from '../immutable-ext';
-import Box from '../box'
-import expect from 'expect';
-import Task from 'data.task';
-import {futurize} from 'futurize';
-const future = futurize(Task);
+import { Either, Right, Left } from '../either'
+import expect from 'expect'
 
 // isomorphic:
 // from(to(x)) == x
@@ -15,7 +10,7 @@ const future = futurize(Task);
 
 const iso = (to, from) => ({
   to,
-  from
+  from,
 })
 
 const chars = iso(s => s.split(''), c => c.join(''))
@@ -25,7 +20,7 @@ const truncate = str =>
   chars.from(chars.to(str).slice(0, 9)).concat('...')
 
 describe('fun iso', () => {
-  let s = 'helloworld'
+  const s = 'helloworld'
 
   it('chars and strings with no changes to original', () => {
     expect(chars.from(chars.to(s))).toBe(s)

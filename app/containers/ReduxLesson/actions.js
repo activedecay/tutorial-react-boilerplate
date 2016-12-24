@@ -3,23 +3,23 @@
  */
 
 import {
-  ADD_TODO, REMOVE_TODO, TOGGLE_TODO
-} from './constants';
+  ADD_TODO, REMOVE_TODO, TOGGLE_TODO,
+} from './constants'
 export function addTodo(id, text) {
   return {
     type: ADD_TODO,
     id,
-    text
+    text,
   }
 }
 export function removeTodo() {
   return {
-    type: REMOVE_TODO
+    type: REMOVE_TODO,
   }
 }
 export function toggleTodo(id) {
   return {
     type: TOGGLE_TODO,
-    id
+    id,
   }
 }

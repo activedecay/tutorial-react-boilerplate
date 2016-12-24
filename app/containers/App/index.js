@@ -6,18 +6,18 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React from 'react';
-import Helmet from 'react-helmet';
+import React from 'react'
+import Helmet from 'react-helmet'
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/sanitize.css';
+import 'sanitize.css/sanitize.css'
 
 // import Img from 'components/Img';
-import Footer from 'components/Footer';
+import Footer from 'components/Footer'
 // import Banner from './banner-metal.jpg';
-import A from 'components/A';
+import A from 'components/A'
 
-import styles from './styles.css';
+import styles from './styles.css'
 
 function App(props) {
   return (
@@ -30,17 +30,17 @@ function App(props) {
         ]}
       />
       <A className={styles.logoWrapper} href="#">
-        {/*<Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />*/}
+        {/* <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />*/}
         :)
       </A>
       {React.Children.toArray(props.children)}
       <Footer />
     </div>
-  );
+  )
 }
 
 App.propTypes = {
   children: React.PropTypes.node,
-};
+}
 
-export default App;
+export default App

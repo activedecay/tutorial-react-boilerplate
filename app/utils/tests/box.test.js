@@ -1,7 +1,8 @@
+/* eslint new-cap: "off" */
 import Box from '../box'
 import expect from 'expect'
 
-// const moneyToFloat = (money) => 
+// const moneyToFloat = (money) =>
 //   parseFloat(money.replace(/\$/g,'')))
 const moneyToFloat = (money) =>
   Box(money)
@@ -16,7 +17,7 @@ const percentToFloat = (percent) =>
 const calculateDiscount = (cost, discount) =>
   moneyToFloat(cost)
     .fold(c => percentToFloat(discount)
-      .fold(d => c - c * d))
+      .fold(d => c - (c * d)))
 
 describe('fun box', () => {
   it('has sides', () => {
@@ -24,7 +25,7 @@ describe('fun box', () => {
   })
 
   it('wont let you down', () => {
-    expect(Box('tits').fold(i => 'ass')).toBe('ass')
+    expect(Box('tits').fold((t) => `${t} and ass`)).toBe('tits and ass')
   })
 
   it('can die', () => {
@@ -32,6 +33,6 @@ describe('fun box', () => {
   })
 
   it('calculates discounts', () => {
-    expect(calculateDiscount("$5.00", "20%")).toBe(4)
+    expect(calculateDiscount('$5.00', '20%')).toBe(4)
   })
 })

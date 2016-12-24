@@ -99,6 +99,9 @@
       }
     },
     "rules": {
+      "no-confusing-arrow": "off",
+      "new-cap": "off",
+      "semi": ["error", "never"],
       "arrow-body-style": [
         2,
         "as-needed"
