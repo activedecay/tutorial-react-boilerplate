@@ -10,6 +10,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import todosReducer from 'containers/ReduxLesson/reducer'
+import filterReducer from 'containers/FilterLink/reducer'
 
 /*
  * routeReducer
@@ -46,6 +47,7 @@ export default function createReducer(asyncReducers) {
     global: globalReducer,
     language: languageProviderReducer,
     reduxLesson: todosReducer,
+    filter: filterReducer,
     // todo when more are added above
     ...asyncReducers,
   });

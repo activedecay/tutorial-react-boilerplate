@@ -1,37 +1,28 @@
 /**
-*
-* Filter
-*
-*/
-
+ * Filter: holds filter links and modifies state.filter visible state
+ */
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import messages from './messages';
-import {ALL, DOIT, DONE} from '../../containers/ReduxLesson/constants'
+import {ALL, DOIT, DONE} from '../../containers/FilterLink/constants'
 import styles from './styles.css';
-import FilterLink from '../FilterLink'
+import FilterLink from '../../containers/FilterLink'
 
-
-function Filter({filterClick, visible}) {
-  /* the child component should only need to know the filter name from constants. */
+const Filter = () => {
   return (
     <div className={styles.filter}>
       <FormattedMessage {...messages.header} />
-      <FilterLink data-current={visible === ALL}
-                  onClick={() => filterClick(ALL)}>
+      <FilterLink filter={ALL}>
         <FormattedMessage {...messages.all} />
       </FilterLink>
-      <FilterLink data-current={visible === DONE}
-                  onClick={() => filterClick(DONE)}>
+      <FilterLink filter={DONE}>
         <FormattedMessage {...messages.done} />
       </FilterLink>
-      <FilterLink data-current={visible === DOIT}
-                  onClick={() => filterClick(DOIT)}>
+      <FilterLink filter={DOIT}>
         <FormattedMessage {...messages.doit} />
       </FilterLink>
     </div>
-  );
+  )
 }
-
-export default Filter;
+export default Filter

@@ -47,7 +47,7 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '/redux/(:filter)',
+      path: '/redux',
       name: 'reduxLesson',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

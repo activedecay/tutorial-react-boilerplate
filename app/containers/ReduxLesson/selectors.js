@@ -3,7 +3,8 @@
  * all top-level state querying is encapsulated here.
  */
 import {createSelector} from 'reselect'; // memoizer
-import * as C from './constants'
+import * as C from '../FilterLink/constants'
+import {selectFilterDomain} from '../FilterLink/selectors'
 
 /** Direct selector to the reduxLesson state domain. see reducers.js */
 const selectReduxLessonDomain = () => state => state.get('reduxLesson');
@@ -27,7 +28,8 @@ export const getVisibleTodos = (state, filter) => {
 
 const selectVisibleTodos = (filter) => createSelector(
   selectReduxLessonDomain(),
-  (domain) => getVisibleTodos(domain.get('todos'), filter)
+  selectFilterDomain(),
+  (todoDomain, filterDomain) => getVisibleTodos(todoDomain.get('todos'), filterDomain)
 );
 
 export {

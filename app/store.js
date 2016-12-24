@@ -26,8 +26,6 @@ const configureStore = (initialState = {}, history) => {
     devtools(),
   ];
 
-  console.log((initialState), fromJS(initialState))
-
   // store lets you dispatch actions
   const store = createStore(
     createReducer(), // specify the how the state is updated with actions
