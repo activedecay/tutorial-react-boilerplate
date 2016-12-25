@@ -1,8 +1,8 @@
 // import TodoList from '../index';
 
-import expect from 'expect'
-// import { shallow } from 'enzyme';
 // import React from 'react';
+// import { shallow } from 'enzyme';
+import expect from 'expect'
 
 describe('<TodoList />', () => {
   xit('Expect to have unit tests specified', () => {

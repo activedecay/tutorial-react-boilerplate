@@ -1,11 +1,20 @@
-// import Filter from '../index';
+import Filter from '../index'
+import FilterLink from '../../../containers/FilterLink'
 
+import messages from '../messages'
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { shallow } from 'enzyme'
 import expect from 'expect'
-// import { shallow } from 'enzyme';
-// import React from 'react';
 
 describe('<Filter />', () => {
-  xit('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false)
+  it('should have filter children', () => {
+    expect(shallow(<Filter />).find(FilterLink).length).toBe(3)
+  })
+
+  it('filter should have internationalized header text', () => {
+    expect(shallow(<Filter />).contains(
+      <FormattedMessage {...messages.header} />
+    )).toEqual(true)
   })
 })

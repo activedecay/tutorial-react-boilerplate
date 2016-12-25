@@ -2,16 +2,12 @@ import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-
 import messages from '../messages'
 import Footer from '../index'
-import A from 'components/A'
 
 describe('<Footer />', () => {
   it('should render the copyright notice', () => {
-    const renderedComponent = shallow(
-      <Footer />
-    )
+    const renderedComponent = shallow(<Footer />)
     expect(renderedComponent.contains(
       <section>
         <p>
@@ -21,7 +17,7 @@ describe('<Footer />', () => {
     )).toEqual(true)
   })
 
-  xit('should render the credits', () => {
+  it('should render the credits', () => {
     const renderedComponent = shallow(<Footer />)
     expect(renderedComponent.contains(
       <section>
@@ -29,7 +25,7 @@ describe('<Footer />', () => {
           <FormattedMessage
             {...messages.authorMessage}
             values={{
-              author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
+              author: 'dJuspin',
             }}
           />
         </p>

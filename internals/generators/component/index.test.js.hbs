@@ -1,11 +1,19 @@
-// import {{ properCase name }} from '../index';
-
-import expect from 'expect';
-// import { shallow } from 'enzyme';
-// import React from 'react';
+import {{ properCase name }} from '../index'
+import messages from '../messages'
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { shallow } from 'enzyme'
+import expect from 'expect'
 
 describe('<{{ properCase name }} />', () => {
+  it('no unit tests specified', () => {
+    expect(true).toEqual(false)
+  })
+
   it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+    const renderedComponent = shallow(<{{ properCase name }} />)
+    expect(renderedComponent.contains(
+      <li />
+    )).toEqual(false)
   });
 });

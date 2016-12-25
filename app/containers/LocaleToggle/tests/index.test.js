@@ -1,13 +1,13 @@
 import LocaleToggle from '../index'
 import LanguageProvider from '../../LanguageProvider'
 
-import expect from 'expect'
-import { shallow, mount } from 'enzyme'
-import configureStore from '../../../store'
 import React from 'react'
+import configureStore from '../../../store'
 import { Provider } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { translationMessages } from '../../../i18n'
+import { shallow, mount } from 'enzyme'
+import expect from 'expect'
 
 describe('<LocaleToggle />', () => {
   let store

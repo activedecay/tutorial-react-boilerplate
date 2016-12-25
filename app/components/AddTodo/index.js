@@ -1,14 +1,8 @@
-/**
- *
- * AddTodo
- *
- */
-
 import React from 'react'
 import styles from './styles.css'
 import Button from '../../components/Button'
 
-const AddTodo = ({ onClick }) => { // todo fix generator (don't use function)
+const AddTodo = ({ onClick }) => {
   let ourText
   return (
     <div className={styles.addTodo}>
