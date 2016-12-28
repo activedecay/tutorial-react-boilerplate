@@ -15,21 +15,26 @@ const selectTodos = () => createSelector(
 )
 
 /** any named function that starts with "get", prepares data to be displayed by the UI. */
-export const getVisibleTodos = (state, filter) => {
-  switch (filter) {
+const getAllTodos = state =>
+  state.ids.map(id => state.byId[id])
+
+const getVisibleTodos = (state, filterName) => {
+  const all = getAllTodos(state)
+  switch (filterName) {
     case C.DONE:
-      return state.filter(t => t.get('completed'))
+      return all.filter(t => t.get('completed'))
     case C.DOIT:
-      return state.filter(t => !t.get('completed'))
+      return all.filter(t => !t.get('completed'))
     default:
-      return state
+      return all
   }
 }
 
 const selectVisibleTodos = () => createSelector(
   selectReduxLessonDomain(),
   selectFilterDomain(),
-  (todoDomain, filterDomain) => getVisibleTodos(todoDomain.get('todos'), filterDomain)
+  (todoDomain, filterDomain) =>
+    getVisibleTodos(todoDomain.get('todos'), filterDomain)
 )
 
 export {

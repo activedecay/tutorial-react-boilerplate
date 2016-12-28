@@ -43,6 +43,8 @@ export function* getReposWatcher() {
 export function* githubData() {
   // Fork watcher so we can continue execution
   const watcher = yield fork(getReposWatcher)
+  // todo refactor
+  // race({task: takeEvery, cancel: take([LOCATION_CHANGE, CANCEL])
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE)

@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga'
 import createReducer from './reducers'
 
 const sagaMiddleware = createSagaMiddleware()
-// noinspection JSUnresolvedVariable devToolsExtension is a Chrome extension it would behoove you to install
+// noinspection JSUnresolvedVariable (devToolsExtension is a Chrome extension it would behoove you to install)
 const devtools = window.devToolsExtension || (() => noop => noop)
 
 const configureStore = (initialState = {}, history) => {
